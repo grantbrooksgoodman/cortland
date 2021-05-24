@@ -13,18 +13,21 @@ class CLTimer {
     
     //==================================================//
     
-    /* MARK: Class-level Variable Declarations */
+    /* MARK: - Class-level Variable Declarations */
     
     var title: String!
-    var alarmDate: Date!
-    //var seconds: Int!
+    var alarmDate: Date! {
+        didSet {
+            alarmDate = alarmDate.startOfMinute
+        }
+    }
     
     //==================================================//
     
-    /* MARK: Initializer Function */
+    /* MARK: - Initializer Function */
     
     @discardableResult required init(title: String, alarmDate: Date) {
         self.title = title
-        self.alarmDate = alarmDate
+        self.alarmDate = alarmDate.startOfMinute
     }
 }

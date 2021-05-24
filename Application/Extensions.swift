@@ -11,7 +11,7 @@ import UIKit
 
 //==================================================//
 
-/* MARK: Array Extensions */
+/* MARK: - Array Extensions */
 
 extension Array {
     var randomElement: Element {
@@ -43,10 +43,10 @@ extension Array where Element == String {
 
 //==================================================//
 
-/* MARK: Date Extensions */
+/* MARK: - Date Extensions */
 
 extension Date {
-    /* MARK: Functions */
+    /* MARK: - Functions */
     
     func elapsedInterval() -> String {
         let interval = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: self, to: Date())
@@ -95,7 +95,7 @@ extension Date {
     
     //--------------------------------------------------//
     
-    /* MARK: Variables */
+    /* MARK: - Variables */
     
     var comparator: Date {
         return currentCalendar.date(bySettingHour: 12, minute: 00, second: 00, of: currentCalendar.startOfDay(for: self))!
@@ -104,7 +104,7 @@ extension Date {
 
 //==================================================//
 
-/* MARK: Dictionary Extensions */
+/* MARK: - Dictionary Extensions */
 
 extension Dictionary {
     mutating func switchKey(fromKey: Key, toKey: Key) {
@@ -122,10 +122,10 @@ extension Dictionary where Value: Equatable {
 
 //==================================================//
 
-/* MARK: Int Extensions */
+/* MARK: - Int Extensions */
 
 extension Int {
-    /* MARK: Functions */
+    /* MARK: - Functions */
     
     ///Returns a random integer value.
     func random(min: Int, max: Int) -> Int {
@@ -134,7 +134,7 @@ extension Int {
     
     //--------------------------------------------------//
     
-    /* MARK: Variables */
+    /* MARK: - Variables */
     
     var ordinalValue: String {
         var determinedSuffix = "th"
@@ -159,7 +159,7 @@ extension Int {
 
 //==================================================//
 
-/* MARK: Sequence Extensions */
+/* MARK: - Sequence Extensions */
 
 extension Sequence where Iterator.Element: Hashable {
     func unique() -> [Iterator.Element] {
@@ -171,10 +171,10 @@ extension Sequence where Iterator.Element: Hashable {
 
 //==================================================//
 
-/* MARK: String Extensions */
+/* MARK: - String Extensions */
 
 extension String {
-    /* MARK: Functions */
+    /* MARK: - Functions */
     
     func containsAny(in: String) -> Bool {
         var count = 0
@@ -243,7 +243,7 @@ extension String {
     
     //--------------------------------------------------//
     
-    /* MARK: Variables */
+    /* MARK: - Variables */
     
     var alphabeticalPosition: Int {
         guard count == 1 else {
@@ -304,7 +304,7 @@ extension String {
 
 //==================================================//
 
-/* MARK: UIColor Extensions */
+/* MARK: - UIColor Extensions */
 
 extension UIColor {
     private convenience init(red: Int, green: Int, blue: Int, alpha: CGFloat = 1.0) {
@@ -333,7 +333,7 @@ extension UIColor {
 
 //==================================================//
 
-/* MARK: UIImageView Extensions */
+/* MARK: - UIImageView Extensions */
 
 extension UIImageView {
     func downloadedFrom(_ link: String, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
@@ -369,10 +369,10 @@ extension UIImageView {
 
 //==================================================//
 
-/* MARK: UILabel Extensions */
+/* MARK: - UILabel Extensions */
 
 extension UILabel {
-    /* MARK: Functions */
+    /* MARK: - Functions */
     
     func fontSizeThatFits(_ alternateText: String?) -> CGFloat {
         if let labelText = alternateText ?? text {
@@ -428,7 +428,7 @@ extension UILabel {
     
     //--------------------------------------------------//
     
-    /* MARK: Variables */
+    /* MARK: - Variables */
     
     var isTruncated: Bool {
         guard let labelText = text as NSString? else {
@@ -443,7 +443,7 @@ extension UILabel {
 
 //==================================================//
 
-/* MARK: UITextView Extensions */
+/* MARK: - UITextView Extensions */
 
 extension UITextView {
     func fontSizeThatFits(_ alternateText: String?) -> CGFloat {
@@ -497,10 +497,10 @@ extension UITextView {
 
 //==================================================//
 
-/* MARK: UIView Extensions */
+/* MARK: - UIView Extensions */
 
 extension UIView {
-    /* MARK: Functions */
+    /* MARK: - Functions */
     
     func addBlur(withActivityIndicator: Bool, withStyle: UIBlurEffect.Style, withTag: Int, alpha: CGFloat) {
         let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: withStyle))
@@ -632,7 +632,7 @@ extension UIView {
     
     //--------------------------------------------------//
     
-    /* MARK: Variables */
+    /* MARK: - Variables */
     
     var parentViewController: UIViewController? {
         var parentResponder: UIResponder? = self

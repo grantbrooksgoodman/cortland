@@ -17,7 +17,7 @@ class MainController: UIViewController, MFMailComposeViewControllerDelegate {
     
     //==================================================//
     
-    /* MARK: Interface Builder UI Elements */
+    /* MARK: - Interface Builder UI Elements */
     
     //UIButtons
     @IBOutlet weak var codeNameButton:     UIButton!
@@ -39,7 +39,7 @@ class MainController: UIViewController, MFMailComposeViewControllerDelegate {
     
     //==================================================//
     
-    /* MARK: Class-level Variable Declarations */
+    /* MARK: - Class-level Variable Declarations */
     
     //Overridden Variables
     override var prefersStatusBarHidden: Bool {
@@ -58,7 +58,7 @@ class MainController: UIViewController, MFMailComposeViewControllerDelegate {
     
     //==================================================//
     
-    /* MARK: Initializer Function */
+    /* MARK: - Initializer Function */
     
     func initializeController() {
         /* Be sure to change the values below.
@@ -75,7 +75,7 @@ class MainController: UIViewController, MFMailComposeViewControllerDelegate {
     
     //==================================================//
     
-    /* MARK: Overridden Functions */
+    /* MARK: - Overridden Functions */
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,10 +84,14 @@ class MainController: UIViewController, MFMailComposeViewControllerDelegate {
         
         view.setBackground(withImageNamed: "Background Image")
         
-        let randomSecondValue = Int().random(min: 5, max: 30)
+        let randomSecondValue = Int().random(min: 15, max: 60)
         let randomDate = currentCalendar.date(byAdding: .second, value: randomSecondValue, to: Date())!
         
         timers = [CLTimer(title: "Test timer", alarmDate: randomDate)]
+        
+        navigationController?.navigationBar.backgroundColor = UIColor(hex: 0x242525)
+        navigationController?.navigationBar.barTintColor = UIColor(hex: 0x242525)
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 21), NSAttributedString.Key.foregroundColor : UIColor(hex: 0xFF962C)]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -104,7 +108,7 @@ class MainController: UIViewController, MFMailComposeViewControllerDelegate {
     
     //==================================================//
     
-    /* MARK: Interface Builder Actions */
+    /* MARK: - Interface Builder Actions */
     
     @IBAction func codeNameButton(_ sender: AnyObject) {
         buildInstance.codeNameButtonAction()
@@ -124,7 +128,7 @@ class MainController: UIViewController, MFMailComposeViewControllerDelegate {
     
     //==================================================//
     
-    /* MARK: Other Functions */
+    /* MARK: - Other Functions */
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         buildInstance.handleMailComposition(withController: controller, withResult: result, withError: error)
@@ -147,7 +151,7 @@ extension MainController: UICollectionViewDataSource, UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TimerCell", for: indexPath as IndexPath) as! TimerCell
         
-        cell.setUpWith(CLTimer: timers[indexPath.item])
+        cell.setUpWith(clTimer: timers[indexPath.item])
         
         return cell
     }

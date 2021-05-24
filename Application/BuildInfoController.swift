@@ -12,12 +12,18 @@ class BuildInfoController: UIViewController {
     
     //==================================================//
     
-    /* MARK: Class-level Variable Declarations */
+    /* MARK: - Class-level Variable Declarations */
     
     //Overriden Variables
-    override var prefersStatusBarHidden:            Bool                 { return false }
-    override var preferredStatusBarStyle:           UIStatusBarStyle     { return .default }
-    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation { return .slide }
+    override var prefersStatusBarHidden: Bool {
+        return false
+    }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return .slide
+    }
     
     //Other Declarations
     let screenBounds = UIScreen.main.bounds
@@ -36,7 +42,7 @@ class BuildInfoController: UIViewController {
     
     //==================================================//
     
-    /* MARK: Constructor Functions */
+    /* MARK: - Constructor Functions */
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -54,7 +60,7 @@ class BuildInfoController: UIViewController {
     
     //==================================================//
     
-    /* MARK: Overridden Functions */
+    /* MARK: - Overridden Functions */
     
     override func loadView() {
         let windowView = UIView()
@@ -73,7 +79,7 @@ class BuildInfoController: UIViewController {
     
     //==================================================//
     
-    /* MARK: Public Functions */
+    /* MARK: - Public Functions */
     
     @objc func keyboardDidShow(note: NSNotification) {
         window.windowLevel = UIWindow.Level(rawValue: 0)
@@ -123,7 +129,7 @@ class BuildInfoController: UIViewController {
     
     //==================================================//
     
-    /* MARK: Private Functions */
+    /* MARK: - Private Functions */
     
     private func getBuildInfoLabel(xBaseline: CGFloat) -> UILabel {
         let buildInfoLabel = UILabel()
@@ -175,13 +181,13 @@ private class BuildInfoWindow: UIWindow {
     
     //==================================================//
     
-    /* MARK: Class-level Variable Declarations */
+    /* MARK: - Class-level Variable Declarations */
     
     var sendFeedbackButton: UIButton?
     
     //==================================================//
     
-    /* MARK: Constructor Functions */
+    /* MARK: - Constructor Functions */
     
     init() {
         super.init(frame: UIScreen.main.bounds)
@@ -195,7 +201,7 @@ private class BuildInfoWindow: UIWindow {
     
     //==================================================//
     
-    /* MARK: Overridden Functions */
+    /* MARK: - Overridden Functions */
     
     fileprivate override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         guard let sendFeedbackButton = sendFeedbackButton else {

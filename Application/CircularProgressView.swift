@@ -13,7 +13,7 @@ class CircularProgressView: UIView {
     
     //==================================================//
     
-    /* MARK: Class-level Variable Declarations */
+    /* MARK: - Class-level Variable Declarations */
     
     //CAShapeLayers
     private var circleLayer   = CAShapeLayer()
@@ -21,7 +21,7 @@ class CircularProgressView: UIView {
     
     //==================================================//
     
-    /* MARK: Initializer Functions */
+    /* MARK: - Initializer Functions */
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,7 +37,7 @@ class CircularProgressView: UIView {
     
     //==================================================//
     
-    /* MARK: Other Functions */
+    /* MARK: - Other Functions */
     
     func createCircularPath() {
         let circularPath = UIBezierPath(arcCenter: CGPoint(x: frame.size.width / 2, y: frame.size.height / 2), radius: 150, startAngle: -.pi / 2, endAngle: 3 * .pi / 2, clockwise: true)
@@ -73,6 +73,7 @@ class CircularProgressView: UIView {
     
     func pauseAnimation() {
         let pausedTime = progressLayer.convertTime(CACurrentMediaTime(), from: nil)
+        
         progressLayer.speed = 0.0
         progressLayer.timeOffset = pausedTime
     }

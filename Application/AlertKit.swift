@@ -15,7 +15,7 @@ class AlertKit {
     
     //==================================================//
     
-    /* MARK: Class-level Variable Declarations */
+    /* MARK: - Class-level Variable Declarations */
     
     //Other Declarations
     var decrementSeconds = 30
@@ -25,7 +25,7 @@ class AlertKit {
     
     //==================================================//
     
-    /* MARK: Enumerated Type Declarations */
+    /* MARK: - Enumerated Type Declarations */
     
     enum AlertControllerTextFieldAttribute {
         case capitalisationType
@@ -47,7 +47,7 @@ class AlertKit {
     
     //==================================================//
     
-    /* MARK: Alert Controller Functions */
+    /* MARK: - Alert Controller Functions */
     
     /**
      Presents a `UIAlertController` tailored to **confirmation of operations.**
@@ -684,7 +684,7 @@ class AlertKit {
     
     //==================================================//
     
-    /* MARK: Helper Functions */
+    /* MARK: - Helper Functions */
     
     ///Advances a string a given amount of characters.
     func cipherString(withString: String, shiftModifier: Int) -> String {
@@ -773,7 +773,7 @@ class AlertKit {
     
     //==================================================//
     
-    /* MARK: Private Functions */
+    /* MARK: - Private Functions */
     
     ///Decrements one second from the expiry counter. If it reaches less than zero, it kills the application.
     @objc private func decrementSecond() {
@@ -820,7 +820,7 @@ class AlertKit {
 
 //==================================================//
 
-/* MARK: Extensions */
+/* MARK: - Extensions */
 
 extension String {
     func ciphered(by modifier: Int) -> String {

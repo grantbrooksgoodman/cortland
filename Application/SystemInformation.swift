@@ -10,7 +10,7 @@ import Foundation
 
 //==================================================//
 
-/* MARK: Enumerated Type Declarations */
+/* MARK: - Enumerated Type Declarations */
 
 public enum SystemInformationError: Error {
     case invalidSize
@@ -21,7 +21,7 @@ public enum SystemInformationError: Error {
 
 //==================================================//
 
-/* MARK: Public Functions */
+/* MARK: - Public Functions */
 
 public func getInformation(fromLevelName: String) throws -> [Int32] {
     var levelBufferSize = Int(CTL_MAXNAME)
@@ -85,7 +85,7 @@ public func informationString(withName: String) throws -> String {
 
 //==================================================//
 
-/* MARK: Private Functions */
+/* MARK: - Private Functions */
 
 private func integerFromSystemInformation(withLevels: [Int32]) throws -> Int64 {
     let informationBuffer = try getInformation(withLevels: withLevels)
@@ -112,7 +112,7 @@ private func stringFromSystemInformation(withLevels: [Int32]) throws -> String {
 
 //==================================================//
 
-/* MARK: Struct Declarations */
+/* MARK: - Struct Declarations */
 
 public struct SystemInformation {
     public static var deviceName: String {

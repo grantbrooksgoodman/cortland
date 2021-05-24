@@ -13,7 +13,7 @@ class CircularButton: UIButton {
     
     //==================================================//
     
-    /* MARK: Overridden Functions */
+    /* MARK: - Overridden Functions */
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)

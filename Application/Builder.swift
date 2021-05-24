@@ -13,14 +13,14 @@ class Build {
     
     //==================================================//
     
-    /* MARK: Class-level Variable Declarations */
+    /* MARK: - Class-level Variable Declarations */
     
     var extraneousInformationView: UIView!
     var sendFeedbackButton: UIButton!
     
     //==================================================//
     
-    /* MARK: Enumerated Type Declarations */
+    /* MARK: - Enumerated Type Declarations */
     
     enum BuildType {
         case preAlpha         /* Typically builds 0-1500 */
@@ -32,7 +32,7 @@ class Build {
     
     //==================================================//
     
-    /* MARK: Constructor Function */
+    /* MARK: - Constructor Function */
     
     @discardableResult required init(_ viewController: UIViewController?) {
         //If there is no global information dictionary, generate and set one.
@@ -52,7 +52,7 @@ class Build {
     
     //==================================================//
     
-    /* MARK: Public Functions */
+    /* MARK: - Public Functions */
     
     func buildMain(_ main: MainController) {
         extraneousInformationView = main.extraneousInformationView
@@ -227,7 +227,7 @@ class Build {
     
     //==================================================//
     
-    /* MARK: Private Functions */
+    /* MARK: - Private Functions */
     
     /**
      Generates the build's SKU.

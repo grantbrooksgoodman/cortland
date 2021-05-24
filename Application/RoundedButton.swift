@@ -12,7 +12,7 @@ class RoundedButton: UIButton {
     
     //==================================================//
     
-    /* MARK: Class-level Variable Declarations */
+    /* MARK: - Class-level Variable Declarations */
     
     //UIColors
     var preferredMainColor:     UIColor!
@@ -23,7 +23,7 @@ class RoundedButton: UIButton {
     
     //==================================================//
     
-    /* MARK: Class Declaration */
+    /* MARK: - Class Declaration */
     
     class func buttonWithType(_ buttonType: UIButton.ButtonType?) -> AnyObject {
         //RED COLOUR: FF4E4E
@@ -35,7 +35,7 @@ class RoundedButton: UIButton {
     
     //==================================================//
     
-    /* MARK: Overridden Functions */
+    /* MARK: - Overridden Functions */
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
@@ -67,7 +67,7 @@ class RoundedButton: UIButton {
     
     //==================================================//
     
-    /* MARK: Initializer Function */
+    /* MARK: - Initializer Function */
     
     func initializeWith(buttonTitle: String?, isEnabled: Bool, mainColor: UIColor, opposingColor: UIColor, preferredTarget: Selector?, withFontSize: CGFloat?, withAlpha: CGFloat) {
         preferredMainColor = mainColor
@@ -115,7 +115,7 @@ class RoundedButton: UIButton {
     
     //==================================================//
     
-    /* MARK: Other Functions */
+    /* MARK: - Other Functions */
     
     func disableButton() {
         UIView.animate(withDuration: 0.5, delay: 0.5, options: .curveEaseOut, animations: {

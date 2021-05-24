@@ -13,7 +13,7 @@ class TimerCell: UICollectionViewCell {
     
     //==================================================//
     
-    /* MARK: Interface Builder UI Elements */
+    /* MARK: - - Interface Builder UI Elements */
     
     //CircularButtons
     @IBOutlet weak var playPauseButton: CircularButton!
@@ -30,7 +30,7 @@ class TimerCell: UICollectionViewCell {
     
     //==================================================//
     
-    /* MARK: Class-level Variable Declarations */
+    /* MARK: - - Class-level Variable Declarations */
     
     private var timer: Timer?
     private var flashRepetitions = 0
@@ -38,11 +38,13 @@ class TimerCell: UICollectionViewCell {
     private var alarmLabelTimer: Timer?
     
     var seconds: Int!
-    private var originalSeconds: Int!
+    //private var originalSeconds: Int!
+    
+    private var clTimer: CLTimer!
     
     //==================================================//
     
-    /* MARK: Structures */
+    /* MARK: - - Structures */
     
     struct ButtonBackgroundColor {
         static let play = UIColor(hex: 0x002514)
@@ -60,7 +62,7 @@ class TimerCell: UICollectionViewCell {
     
     //==================================================//
     
-    /* MARK: Overridden Functions */
+    /* MARK: - - Overridden Functions */
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
@@ -75,7 +77,7 @@ class TimerCell: UICollectionViewCell {
         
         resetButton.isEnabled = false
         
-        layer.backgroundColor = UIColor(hex: 0x2D3436).cgColor
+        layer.backgroundColor = UIColor(hex: 0x353536).cgColor //UIColor(hex: 0x2D3436).cgColor
         layer.borderColor = UIColor.clear.cgColor
         layer.borderWidth = 10
         layer.cornerRadius = 5
@@ -88,26 +90,39 @@ class TimerCell: UICollectionViewCell {
     
     //==================================================//
     
-    /* MARK: Core Functions */
+    /* MARK: - - Core Functions */
     
-    func setUpWith(CLTimer: CLTimer) {
-        originalSeconds = CLTimer.alarmDate.seconds(from: Date())
-        seconds = originalSeconds
+    func setUpWith(clTimer: CLTimer) {
+        self.clTimer = clTimer
         
-        titleLabel.text = "«\(CLTimer.title.uppercased())»"
+        updateDuration()
         
         let timeFormatter = DateFormatter()
         timeFormatter.dateFormat = "hh:mm"
         
-        alarmLabel.text = timeFormatter.string(from: CLTimer.alarmDate)
-        timeRemainingLabel.text = seconds.timeValue()
+        //seconds = originalSeconds
+        
+        titleLabel.text = "«\(clTimer.title.uppercased())»"
+        timeRemainingLabel.text = "..."
+        
+        alarmLabel.text = timeFormatter.string(from: clTimer.alarmDate!)
     }
     
-    @objc func updateAlarmLabel() {
+    // TODO: Fix bugs with this
+    func updateDuration() {
+        if clTimer.alarmDate < Date().startOfMinute || clTimer.alarmDate == Date().startOfMinute {
+            clTimer.alarmDate = clTimer.alarmDate.oneDayAdvanced
+        }
         
+        seconds = clTimer.alarmDate!.seconds(from: Date())
+        
+        progressView.progressAnimation(duration: TimeInterval(seconds))
     }
     
     func start() {
+        updateDuration()
+        showAttributes()
+        
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(decrement), userInfo: nil, repeats: true)
         
         progressView.progressAnimation(duration: TimeInterval(seconds))
@@ -117,6 +132,9 @@ class TimerCell: UICollectionViewCell {
     }
     
     func resume() {
+        updateDuration()
+        showAttributes()
+        
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(decrement), userInfo: nil, repeats: true)
         
         progressView.resumeAnimation()
@@ -124,6 +142,9 @@ class TimerCell: UICollectionViewCell {
     }
     
     func pause() {
+        hideAttributes()
+        updateDuration()
+        
         if let timer = self.timer {
             timer.invalidate()
         }
@@ -133,12 +154,14 @@ class TimerCell: UICollectionViewCell {
     }
     
     func reset() {
+        hideAttributes()
+        updateDuration()
+        
         if let timer = self.timer {
             timer.invalidate()
         }
         
-        seconds = originalSeconds
-        timeRemainingLabel.text = seconds.timeValue()
+        //seconds = originalSeconds
         
         progressView.progressAnimation(duration: TimeInterval(seconds))
         showPlayButton()
@@ -146,7 +169,7 @@ class TimerCell: UICollectionViewCell {
     
     //==================================================//
     
-    /* MARK: Interface Builder Actions */
+    /* MARK: - - Interface Builder Actions */
     
     @IBAction func playPauseButton(_ sender: Any) {
         if timer != nil {
@@ -174,7 +197,27 @@ class TimerCell: UICollectionViewCell {
     
     //==================================================//
     
-    /* MARK: Button Layout Functions */
+    /* MARK: - - Layout Functions */
+    
+    func showAttributes() {
+        UIView.animate(withDuration: 0.5) {
+            self.progressView.alpha = 1
+        }
+        
+        UIView.transition(with: self.timeRemainingLabel, duration: 0.5, options: .transitionCrossDissolve) {
+            self.timeRemainingLabel.text = self.seconds.timeValue()
+        }
+    }
+    
+    func hideAttributes() {
+        UIView.animate(withDuration: 0.5) {
+            self.progressView.alpha = 0
+        }
+        
+        UIView.transition(with: self.timeRemainingLabel, duration: 0.5, options: .transitionCrossDissolve) {
+            self.timeRemainingLabel.text = "..."
+        }
+    }
     
     func showPlayButton() {
         let playImage = UIImage(systemName: "play.fill")
@@ -194,7 +237,7 @@ class TimerCell: UICollectionViewCell {
     
     //==================================================//
     
-    /* MARK: Timer-triggered Functions */
+    /* MARK: - - Timer-triggered Functions */
     
     @objc func decrement() {
         seconds -= 1
@@ -228,6 +271,13 @@ class TimerCell: UICollectionViewCell {
     }
 }
 
+//==================================================//
+
+/* MARK: - - Extensions */
+
+/**/
+
+/* MARK: - Int */
 extension Int {
     func timeValue() -> String {
         let hours = self / 3600
@@ -247,5 +297,16 @@ extension Int {
         }
         
         return String(format:"%02i:%02i:%02i", hours, minutes, seconds)
+    }
+}
+
+/* MARK: - Date */
+extension Date {
+    var startOfMinute: Date {
+        return currentCalendar.date(bySetting: .second, value: 0, of: self)!
+    }
+    
+    var oneDayAdvanced: Date {
+        return currentCalendar.date(byAdding: .day, value: 1, to: self)!
     }
 }

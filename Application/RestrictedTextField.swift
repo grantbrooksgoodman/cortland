@@ -13,7 +13,7 @@ class RestrictedTextField: UITextField {
     
     //==================================================//
     
-    /* MARK: Overridden Functions */
+    /* MARK: - Overridden Functions */
     
     override func closestPosition(to point: CGPoint) -> UITextPosition? {
         return position(from: beginningOfDocument, offset: self.text?.count ?? 0)

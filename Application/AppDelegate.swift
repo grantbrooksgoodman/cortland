@@ -16,7 +16,7 @@ import Reachability
 
 //==================================================//
 
-/* MARK: Top-level Variable Declarations */
+/* MARK: - Top-level Variable Declarations */
 
 //Booleans
 var darkMode                              = false
@@ -51,7 +51,7 @@ var touchTimer: Timer?
     
     //==================================================//
     
-    /* MARK: Class-level Variable Declarations */
+    /* MARK: - Class-level Variable Declarations */
     
     //Boolean Declarations
     var currentlyAnimating = false
@@ -65,7 +65,7 @@ var touchTimer: Timer?
     
     //==================================================//
     
-    /* MARK: Required Functions */
+    /* MARK: - Required Functions */
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         let tapGesture = UITapGestureRecognizer(target: self, action: nil)
@@ -111,7 +111,7 @@ var touchTimer: Timer?
     
     //==================================================//
     
-    /* MARK: Other Functions */
+    /* MARK: - Other Functions */
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         touchTimer?.invalidate()
@@ -140,7 +140,7 @@ var touchTimer: Timer?
 
 //==================================================//
 
-/* MARK: Helper Functions */
+/* MARK: - Helper Functions */
 
 /**/
 
@@ -386,7 +386,7 @@ func showProgressHUD(text: String?, delay: Double?) {
 
 //--------------------------------------------------//
 
-/* MARK: Miscellaneous Functions */
+/* MARK: - Miscellaneous Functions */
 
 ///Retrieves the appropriately random tag integer for a given title.
 func aTagFor(_ theViewNamed: String) -> Int {
